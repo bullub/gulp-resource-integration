@@ -6,6 +6,7 @@
 "use strict";
 const through2 = require("through2");
 const resourceIntegration = require("resource-integration");
+const gulpUtil = require("gulp-util");
 const crypto = require("crypto");
 const path = require("path");
 
@@ -23,14 +24,23 @@ module.exports = function (options) {
     let _combinedRecords = {};
 
     return through2.obj(function (file, encoding, next) {
-
+        var self = this;
         if(!file || file.isStream() || !file.contents) {
             next(null, file);
             return ;
         }
 
         //解析当前文件中包含的语法
-        let syntaxInfo = resourceIntegration.resolveSyntax(file.contents.toString("utf-8"), file.path);
+        let syntaxInfo = null;
+        try {
+            syntaxInfo = resourceIntegration.resolveSyntax(file.contents.toString("utf-8"), file.path);
+        } catch (e) {
+            self.emit('error', new gulpUtil.PluginError('gulp-resource-integration', e.message));
+        }
+
+        if(null === syntaxInfo) {
+            return ;
+        }
 
         let {combinedRecords, contentLines} = syntaxInfo;
 

@@ -1,6 +1,6 @@
 {
   "name": "gulp-resource-integration",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "A resource-integration-based gulp plugin",
   "main": "src/index.js",
   "scripts": {
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/bullub/gulp-resource-integration#readme",
   "dependencies": {
+    "gulp-util": "^3.0.8",
     "resource-integration": "*",
     "through2": "^2.0.1"
   }
