@@ -83,7 +83,7 @@ module.exports = function (options) {
             }
 
             //将重写的标签加到
-            contentLines[combinedRecord.startLine] = contentLines[combinedRecord.startLine] + "\n" + BuildHelper.getTag(file, buildFile, combinedRecord.type);
+            contentLines[combinedRecord.startLine] = contentLines[combinedRecord.startLine] + "\n" + BuildHelper.getTag(file, buildFile, combinedRecord.type, combinedResult.contents);
 
             contentLines[combinedRecord.endLine] = '';
 
